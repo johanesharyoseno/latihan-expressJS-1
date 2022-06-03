@@ -1,4 +1,5 @@
 const express = require ('express')
+const router = require ('./router')
 const app = express ()
 const port = 3000
 const logger = ( req, res, next) => {console.log (`${req.method} ${req.url}`) 
@@ -7,17 +8,21 @@ app.set ('view engine', 'ejs')
 app.use (logger)
 app.use (express.json())
 app.use(express.urlencoded({extended: false}))
-const router = require ('./router')
 app.use (router)
 
 app.get ('/', (req, res) => res.send ('Hello World!'))
 app.get ('/greeting', (req, res) => {res.render ('index')})
-app.get ('/greet', (req, res) => {const name = req.query.name || 'johanes'
-            res.render ('greet',{
-                name
-            })
+app.get ('/greet', (req, res) => {const name = req.query.name || 'nama'
+            res.render ('greet',{name})
         })
 app.get ('/bingle', (req, res) => res.send ('Selamat datang di Bingle'))
+app.get('/register',(req,res)=>{
+    res.render('register')
+})
+app.post ('/register', (req, res)=>{
+    const { email, password} = req.body
+    res.json ([email, password])
+})
 app.get ('/products', (req, res)=> res.json([
     "apple",
     "redmi",
@@ -56,7 +61,7 @@ app.get ('/users', (req, res)=> res.json([
     iniError; //ini penyebab error
 });
 
-//Internal Server Error Handler
+Internal Server Error Handler 
 app.use (function (err, req, res, next){
     console.log(err);
     res.status (500).json ({
