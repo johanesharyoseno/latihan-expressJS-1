@@ -1,0 +1,13 @@
+[{
+    "id": "1",
+    "name": "nasi goreng",
+    "tipe": "seafood",
+    "harga": 50000
+},
+{
+    "id": "2",
+    "name": "mie goreng",
+    "tipe": "seafood",
+    "harga": 55000
+}
+]
